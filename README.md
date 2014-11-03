@@ -28,4 +28,15 @@ the `gen_event` executable generates a single `created` event. If you want to ge
 bin/gen_event -m 3 # will generate all three events in a series
 ```
 
-Other options are available for setting the rabbitmq host, port, exchange, etc. See the [bin/gen_event](bin/gen_event) file for all options.
+## Command Line Options
+
+|Option              |Short|Long           |
+|--------------------|:---:|:-------------:|
+|RabbitMQ host       |     |--host         |
+|RabbitMQ vhost      |     |--vhost        |
+|RabbitMQ user       |-u   |--user         |
+|RabbitMQ password   |     |--password     |
+|RabbitMQ port       |     |--port         |
+|Exchange routing key|-k   |--key          |
+|Exchange name       |     |--exchange     |
+|Number of events    |-m   |--message-count|
