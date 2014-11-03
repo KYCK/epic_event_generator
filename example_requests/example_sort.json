@@ -1,0 +1,26 @@
+{
+	"query": {
+		"filtered": {
+			"query": {"match_all": {}},
+			"filter": {
+				"nested": {
+					"path": "event",
+					"filter": {
+						"range": {
+							"timestamp": {
+								"from": "2014-10-1",
+								"to": "2014-10-15"
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"sort": {
+		"event.timestamp": {
+			"order": "asc",
+			"mode": "min"
+		}
+	}
+}

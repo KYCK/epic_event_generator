@@ -1,0 +1,15 @@
+{
+	"query": {
+		"filtered": {
+			"query": {"match_all": {}},
+			"filter": {
+				"nested": {
+					"path": "trigger",
+					"filter": {
+						"term": { "trigger.uuid":"7dd5b267-dcdb-4063-96b0-3bcb0b14c000" }
+					}
+				}
+			}
+		}
+	}
+}

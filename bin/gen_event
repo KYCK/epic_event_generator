@@ -1,0 +1,70 @@
+#! /usr/bin/env ruby
+
+ROOT = File.expand_path('../../', __FILE__)
+$:.unshift File.join(ROOT, "lib")
+
+require 'optparse'
+require 'events'
+require 'bunny'
+
+rabbit_conn_options = {}
+exchange_options    = {}
+options             = {}
+OptionParser.new do |opts|
+  opts.banner = "Usage: gen_events [options]"
+
+  opts.on('--host [HOST]', String, 'RabbitMQ host') do |h|
+    rabbit_conn_options[:host] = h
+  end
+
+  opts.on('--vhost [VHOST]', String, 'RabbitMQ vhost') do |vhost|
+    rabbit_conn_options[:vhost] = vhost
+  end
+
+  opts.on('-u', '--user [USER]', String, 'RabbitMQ user') do |user|
+    rabbit_conn_options[:user] = user
+  end
+
+  opts.on('--password [PASSWORD]', String, 'RabbitMQ password') do |pw|
+    rabbit_conn_options[:password] = pw
+  end
+
+  opts.on('--port [PORT]', OptionParser::DecimalInteger , 'RabbitMQ port') do |p|
+    rabbit_conn_options[:port] = p
+  end
+
+  opts.on('-k', '--key [ROUTING KEY]', String, 'RabbitMQ routing key') do |k|
+    exchange_options[:key] = k
+  end
+
+  opts.on('--exchange [EXCHANGE]', String, 'RabbitMQ exchange to publish to') do |ex|
+    exchange_options[:name] = ex
+  end
+
+  opts.on('-m', '--message-count [1-3]', OptionParser::DecimalInteger, 'Number of Events in series to publish') do |count|
+    options[:count] = count
+  end
+
+end.parse!
+
+conn = Bunny.new rabbit_conn_options
+conn.start
+
+ch = conn.create_channel
+
+name = exchange_options.fetch(:name, 'epic')
+key  = exchange_options.fetch(:key,  '#')
+
+x  = Bunny::Exchange.new(ch, :direct, name)
+
+events = Events.new
+
+count = options.fetch(:count, 1)
+count = 3 if count > 3
+count.times do
+  x.publish events.to_json, routing_key: key
+  events.next_step!
+end
+
+conn.close
+
