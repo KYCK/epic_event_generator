@@ -45,19 +45,31 @@ OptionParser.new do |opts|
     options[:count] = count
   end
 
+  opts.on('--no-publish', 'Do not publish to rabbitmq') do
+    options[:publish] = false
+  end
+
 end.parse!
 
-conn = Bunny.new rabbit_conn_options
-conn.start
+publish = options.fetch(:publish, true)
 
-ch   = conn.create_channel
-name = exchange_options.fetch(:name, 'epic')
-key  = exchange_options.fetch(:key,  '#')
-x    = Bunny::Exchange.new(ch, :direct, name)
+if publish
+  conn = Bunny.new rabbit_conn_options
+  conn.start
 
-options.fetch(:count, 1).times do
-  x.publish Event.generate, routing_key: key
+  ch   = conn.create_channel
+  name = exchange_options.fetch(:name, 'epic')
+  key  = exchange_options.fetch(:key,  '#')
+  x    = Bunny::Exchange.new(ch, :direct, name)
+
+  options.fetch(:count, 1).times do
+    x.publish Event.generate, routing_key: key
+  end
+
+  conn.close
+else
+  options.fetch(:count, 1).times do
+    puts Event.generate
+  end
 end
-
-conn.close
 
