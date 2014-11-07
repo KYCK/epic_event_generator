@@ -25,7 +25,7 @@ class Event
           type: "currentUser",
           uuid: SecureRandom.uuid
         },
-        card: {
+        data: {
           uuid: SecureRandom.uuid,
           expiresOn: "2015-06-01T00:00:00+00:00",
           firstName: gen_string,
