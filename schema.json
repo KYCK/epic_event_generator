@@ -1,0 +1,44 @@
+# Current Schema (as of 2014-11-06)
+{
+    "eventTarget": "card",
+    "eventType": "created",
+    "eventTimestamp": "2014-08-11T14:53:25-04:00",
+    "eventTrigger": {
+        "type": "currentUser",
+        "uuid":"7dd5b267-dcdb-4063-96b0-3bcb0b14c000"
+    },
+    "data": {
+        "uuid":"e7c84075-f81f-4275-81eb-3035547f5cb4",
+        "expiresOn":"2015-06-01T00:00:00+00:00",
+        "firstName":"yzxkr",
+        "lastName":"anqui",
+        "kind":"staff",
+        "avatar":"dvhmn",
+        "birthdate":"2003-01-06T14:53:25-04:00",
+        "status":"pending"
+    }
+}
+
+# Initial Schema
+{
+    "event":{
+        "name":"cardCreated",
+        "target":"card",
+        "method":"created",
+        "timestamp":"2014-08-11T14:53:25-04:00",
+        "data":{
+            "uuid":"e7c84075-f81f-4275-81eb-3035547f5cb4",
+            "expiresOn":"2015-06-01T00:00:00+00:00",
+            "firstName":"yzxkr",
+            "lastName":"anqui",
+            "kind":"staff",
+            "avatar":"dvhmn",
+            "birthdate":"2003-01-06T14:53:25-04:00",
+            "status":"pending"
+        }
+    },
+    "trigger":{
+        "type":"currentUser",
+        "uuid":"7dd5b267-dcdb-4063-96b0-3bcb0b14c000"
+    }
+}
