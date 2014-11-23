@@ -26,14 +26,35 @@ class Event
           uuid: SecureRandom.uuid
         },
         data: {
-          uuid: SecureRandom.uuid,
+          amountPaid: (1..1000).to_a.sample,
+          approvedOn: gen_date(ONE_DAY..ONE_MONTHS),
+          avatar: gen_string,
+          avatarUri: gen_string,
+          avatarVersion: gen_string,
+          birthdate: gen_birthdate,
+          cardedUserId: SecureRandom.uuid,
+          cardedFor: SecureRandom.uuid,
+          createdAt: gen_date(ONE_MONTHS..SIX_MONTHS),
+          documentIds: 1.upto(3).map { SecureRandom.uuid },
+          duplicateLookupHash: SecureRandom.uuid,
           expiresOn: "2015-06-01T00:00:00+00:00",
           firstName: gen_string,
-          lastName: gen_string,
+          hasDuplicates: [true, false].sample,
+          inactiveOn: [gen_date(ONE_DAY..ONE_MONTHS), nil].sample,
+          isRenewal: [true, false].sample,
           kind: %w(staff player).sample,
-          avatar: gen_string,
-          birthdate: gen_birthdate,
-          status: %w(pending approved revoked).sample
+          kyckId: SecureRandom.uuid,
+          lastName: gen_string,
+          messageStatus: %w(pending approved revoked).sample,
+          middleName: gen_string,
+          migratedId: SecureRandom.uuid,
+          noteIds: 1.upto(3).map { SecureRandom.uuid },
+          orderId: SecureRandom.uuid,
+          orderItemId: SecureRandom.uuid,
+          processedOn: gen_date(ONE_DAY..ONE_MONTHS),
+          sanctioningBodyId: SecureRandom.uuid,
+          status: %w(pending approved revoked).sample,
+          updatedAt: gen_timestamp(:today)
         }
       }
     end
