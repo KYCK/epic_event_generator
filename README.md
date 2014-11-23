@@ -47,16 +47,18 @@ bin/gen_event -c 10 # will generate 10 events
 
 ## Command Line Options
 
-|Option              |Short|Long       |
-|--------------------|:---:|:---------:|
-|RabbitMQ host       |     |--host     |
-|RabbitMQ vhost      |     |--vhost    |
-|RabbitMQ user       |-u   |--user     |
-|RabbitMQ password   |     |--password |
-|RabbitMQ port       |     |--port     |
-|Exchange routing key|-k   |--key      |
-|Exchange name       |     |--exchange |
-|Number of events    |-c   |--count    |
+|Option                |Short|Long          |
+|----------------------|:---:|:------------:|
+|RabbitMQ host         |     |--host        |
+|RabbitMQ vhost        |     |--vhost       |
+|RabbitMQ user         |-u   |--user        |
+|RabbitMQ password     |     |--password    |
+|RabbitMQ port         |     |--port        |
+|Exchange routing key  |-k   |--key         |
+|Exchange name         |     |--exchange    |
+|Number of events      |-c   |--count       |
+|Don't publish (stdout)|     |--no-publish  |
+|Use random date       |     |--random-dates|
 
 ## TODO:
 

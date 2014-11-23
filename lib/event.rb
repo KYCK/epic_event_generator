@@ -12,15 +12,15 @@ class Event
   SIXTEEN_YEARS = ONE_YEARS  * 16
 
   class << self
-    def generate
-      event_hash.to_json
+    def generate(event_date = :today)
+      event_hash(event_date).to_json
     end
 
-    def event_hash
+    def event_hash(event_date)
       {
         eventTarget: "card",
         eventType: %w(created updated deleted).sample,
-        eventTimestamp: gen_timestamp,
+        eventTimestamp: gen_timestamp(event_date),
         eventTrigger: {
           type: "currentUser",
           uuid: SecureRandom.uuid
@@ -42,8 +42,12 @@ class Event
       DateTime.now - range.to_a.sample
     end
 
-    def gen_timestamp
-      gen_date(ONE_DAY..SIX_MONTHS)
+    def gen_timestamp(event_date)
+      if event_date == :today
+        DateTime.now
+      else
+        gen_date(ONE_DAY..SIX_MONTHS)
+      end
     end
 
     def gen_birthdate

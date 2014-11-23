@@ -49,8 +49,13 @@ OptionParser.new do |opts|
     options[:publish] = false
   end
 
+  opts.on('--random-dates', 'Use random timestamp for generated events') do
+    options[:dates] = :random
+  end
+
 end.parse!
 
+dates   = options.fetch(:dates, :today)
 publish = options.fetch(:publish, true)
 
 if publish
@@ -59,17 +64,17 @@ if publish
 
   ch   = conn.create_channel
   name = exchange_options.fetch(:name, 'epic')
-  key  = exchange_options.fetch(:key,  '#')
-  x    = Bunny::Exchange.new(ch, :direct, name)
+  key  = exchange_options.fetch(:key,  'epic.test.event')
+  x    = Bunny::Exchange.new(ch, :topic, name)
 
   options.fetch(:count, 1).times do
-    x.publish Event.generate, routing_key: key
+    x.publish Event.generate(dates), routing_key: key
   end
 
   conn.close
 else
   options.fetch(:count, 1).times do
-    puts Event.generate
+    puts Event.generate(dates)
   end
 end
 
