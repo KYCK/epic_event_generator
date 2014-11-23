@@ -28,7 +28,31 @@
             "card": {
                 "type": "nested",
                 "properties": {
-                    "uuid": {
+                    "amountPaid": {
+                        "type": "integer"
+                    },
+                    "approvedOn": {
+                        "type": "date"
+                    },
+                    "avatar": {
+                        "type": "string",
+                        "index": "not_analyzed"
+                    },
+                    "avatarUri": {
+                        "type": "string",
+                        "index": "not_analyzed"
+                    },
+                    "avatarVersion": {
+                        "type": "string",
+                        "index": "not_analyzed"
+                    },
+                    "birthdate": {
+                        "type": "date"
+                    },
+                    "createdAt": {
+                        "type": "date"
+                    },
+                    "duplicateLookupHash": {
                         "type": "string",
                         "index": "not_analyzed"
                     },
@@ -39,7 +63,20 @@
                         "type": "string",
                         "index": "not_analyzed"
                     },
+                    "hasDuplicates": {
+                        "type": "boolean"
+                    },
+                    "inactiveOn": {
+                        "type": "date"
+                    },
+                    "isRenewal": {
+                        "type": "boolean"
+                    },
                     "kind": {
+                        "type": "string",
+                        "index": "not_analyzed"
+                    },
+                    "kyckId": {
                         "type": "string",
                         "index": "not_analyzed"
                     },
@@ -47,16 +84,35 @@
                         "type": "string",
                         "index": "not_analyzed"
                     },
-                    "avatar": {
+                     "messageStatus": {
                         "type": "string",
                         "index": "not_analyzed"
                     },
-                    "birthdate": {
+                    "middleName": {
+                        "type": "string",
+                        "index": "not_analyzed"
+                    },
+                    "migratedId": {
+                        "type": "string",
+                        "index": "not_analyzed"
+                    },
+                    "orderId": {
+                        "type": "string",
+                        "index": "not_analyzed"
+                    },
+                    "orderItemId": {
+                        "type": "string",
+                        "index": "not_analyzed"
+                    },
+                    "processedOn": {
                         "type": "date"
                     },
                     "status": {
                         "type": "string",
                         "index": "not_analyzed"
+                    },
+                    "updatedAt": {
+                        "type": "date"
                     }
 				}
 			}
